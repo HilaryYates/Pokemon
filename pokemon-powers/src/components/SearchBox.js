@@ -41,9 +41,8 @@ class SearchBox extends Component {
         //todo + search
       );
       const data = await response.json();
-      console.log(data);
-      this.setState({
-        pokemonData: data,
+      this.setState({ pokemonData: data }, () => {
+        console.log(this.state.pokemonData);
       });
     };
     return (
