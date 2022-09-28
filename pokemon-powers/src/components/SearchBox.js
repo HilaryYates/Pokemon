@@ -30,7 +30,7 @@ import App from "../App";
 class SearchBox extends Component {
   constructor() {
     super();
-    this.state = { pokemonData: [], abilities: [], heldItems: [], moves: [] };
+    this.state = { pokemonData: [] };
   }
 
   render() {
@@ -42,7 +42,6 @@ class SearchBox extends Component {
       const data = await response.json();
       this.setState({ pokemonData: data }, () => {
         const pokemon = this.state.pokemonData.name;
-        //todo GET THIS IN THE STATE
         const abilities = this.state.pokemonData.abilities.map(
           (power) => power.ability.name
         );
@@ -65,9 +64,8 @@ class SearchBox extends Component {
         <h2>{this.state.pokemonData.name}</h2>
         <h3>Stats</h3>
         <p>abilities</p>
-        {this.state.abilities.map((ability) => (
-          <p>{ability}</p>
-        ))}
+        //! UNDEFINED
+        {this.state.pokemonData.abilities.map((power) => power.ability.name)}
         <p>held items</p>
         <p>moves</p>
       </div>
