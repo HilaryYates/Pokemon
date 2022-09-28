@@ -8,12 +8,6 @@ class App extends Component {
     this.state = { searchField: "" };
   }
 
-  componentDidMount() {
-    fetch("https://pokeapi.co/api/v2/pokemon").then((response) =>
-      response.json()
-    );
-  }
-
   onSearchChange = (event) => {
     this.setState({ searchField: event.target.value });
   };
@@ -21,7 +15,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchBox searchChange={this.onSearchChange} />
+        <SearchBox
+          searchChange={this.onSearchChange}
+          search={this.state.searchField}
+        />
       </div>
     );
   }
