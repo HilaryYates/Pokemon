@@ -3,11 +3,14 @@ import React from "react";
 const SearchBox = ({ searchField, searchChange }) => {
   return (
     <div>
-      <input
-        type='search'
-        placeholder='search pokemon'
-        onChange={searchChange}
-      ></input>
+      <form>
+        <input
+          type='search'
+          placeholder='search pokemon'
+          onChange={searchChange}
+        ></input>
+        <input type='button' value='Search!' />
+      </form>
     </div>
   );
 };

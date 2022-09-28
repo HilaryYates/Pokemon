@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import SearchBox from "./components/SearchBox";
-import Button from "./components/Button";
 
 class App extends Component {
   constructor() {
@@ -23,7 +22,6 @@ class App extends Component {
     return (
       <div>
         <SearchBox searchChange={this.onSearchChange} />
-        <Button />
       </div>
     );
   }
