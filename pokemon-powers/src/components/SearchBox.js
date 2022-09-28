@@ -30,23 +30,30 @@ import App from "../App";
 class SearchBox extends Component {
   constructor() {
     super();
-    this.state = { pokemonData: [] };
+    this.state = { pokemonData: [], abilities: [], heldItems: [], moves: [] };
   }
 
   render() {
     const searchPokemon = async (event) => {
       event.preventDefault();
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon/pikachu"
-        //todo + search
+        "https://pokeapi.co/api/v2/pokemon/" + this.props.search
       );
       const data = await response.json();
       this.setState({ pokemonData: data }, () => {
-        console.log(this.state.pokemonData);
+        const pokemon = this.state.pokemonData.name;
+        //todo GET THIS IN THE STATE
+        const abilities = this.state.pokemonData.abilities.map(
+          (power) => power.ability.name
+        );
+
+        const heldItems = data.held_items.map((item) => item.item.name);
+        const moves = data.moves.map((move) => move.move.name);
       });
     };
     return (
       <div>
+        <h1>Pokemon</h1>
         <form onSubmit={searchPokemon}>
           <input
             type='search'
@@ -55,6 +62,14 @@ class SearchBox extends Component {
           ></input>
           <input type='button' value='Search!' />
         </form>
+        <h2>{this.state.pokemonData.name}</h2>
+        <h3>Stats</h3>
+        <p>abilities</p>
+        {this.state.abilities.map((ability) => (
+          <p>{ability}</p>
+        ))}
+        <p>held items</p>
+        <p>moves</p>
       </div>
     );
   }
