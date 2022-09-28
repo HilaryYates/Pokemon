@@ -5,8 +5,7 @@ const SearchBox = ({ searchField, searchChange, search }) => {
     event.preventDefault();
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + search);
     const data = await response.json();
-    console.log(data);
-    console.log(search);
+    const abilities = data.abilities.map((power) => power.ability.name);
   };
   return (
     <div>
