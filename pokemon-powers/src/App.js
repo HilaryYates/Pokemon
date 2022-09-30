@@ -5,11 +5,13 @@ import SearchBox from "./components/SearchBox";
 class App extends Component {
   constructor() {
     super();
-    this.state = { searchField: "" };
+    this.state = { searchField: "", three: 3 };
   }
 
   onSearchChange = (event) => {
-    this.setState({ searchField: event.target.value });
+    this.setState({ searchField: event.target.value }, () => {
+      // console.log(this.state.searchField);
+    });
   };
 
   render() {
