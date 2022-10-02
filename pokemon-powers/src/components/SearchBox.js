@@ -38,7 +38,6 @@ const SearchBox = ({ searchChange, search }) => {
   return (
     <div>
       <h1>Pokemon</h1>
-      {fetchOk ? <div></div> : <div>Sorry, you haven't caught that</div>}
       <form onSubmit={getPokemon}>
         <input
           type='search'
@@ -47,32 +46,39 @@ const SearchBox = ({ searchChange, search }) => {
         ></input>
         <input type='button' value='Search!' />
       </form>
-      <h3>Stats</h3>
-      <p>moves</p>
-      {moves.map((move) => (
-        <ul>
-          <li>
-            <p>{move}</p>
-          </li>
-        </ul>
-      ))}
-      <p>abilities</p>
-      {abilities.map((ability) => (
-        <ul>
-          <li>
-            <p>{ability}</p>
-          </li>
-        </ul>
-      ))}
-      <p>held items</p>
+      {fetchOk ? (
+        <div>
+          <h3>Stats</h3>
 
-      {heldItems.map((item) => (
-        <ul>
-          <li>
-            <p>{item}</p>
-          </li>
-        </ul>
-      ))}
+          <p>moves</p>
+          {moves.map((move) => (
+            <ul>
+              <li>
+                <p>{move}</p>
+              </li>
+            </ul>
+          ))}
+          <p>abilities</p>
+          {abilities.map((ability) => (
+            <ul>
+              <li>
+                <p>{ability}</p>
+              </li>
+            </ul>
+          ))}
+          <p>held items</p>
+
+          {heldItems.map((item) => (
+            <ul>
+              <li>
+                <p>{item}</p>
+              </li>
+            </ul>
+          ))}
+        </div>
+      ) : (
+        <div>Sorry, you haven't caught that</div>
+      )}
     </div>
   );
 };
