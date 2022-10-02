@@ -1,33 +1,44 @@
 // import React from "react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import App from "../App";
 
 const SearchBox = ({ searchChange, search }) => {
+  const [fetchOk, setFetchOk] = useState([]);
   const [abilities, setAbilities] = useState([]);
   const [heldItems, setheldItems] = useState([]);
   const [moves, setMoves] = useState([]);
 
   const getPokemon = async (event) => {
     event.preventDefault();
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + search);
-    const data = await response.json();
 
-    const moves = data.moves.map((move) => move.move.name);
+    const fetchStats = await fetch(
+      "https://pokeapi.co/api/v2/pokemon/" + search
+    );
+
+    const fetchOk = fetchStats.ok;
+
+    setFetchOk(fetchOk);
+
+    const statsData = await fetchStats.json();
+
+    const moves = statsData.moves.map((move) => move.move.name);
 
     setMoves(moves);
 
-    const abilities = data.abilities.map((ability) => ability.ability.name);
+    const abilities = statsData.abilities.map(
+      (ability) => ability.ability.name
+    );
 
     setAbilities(abilities);
 
-    const heldItems = data.held_items.map((item) => item.item.name);
+    const heldItems = statsData.held_items.map((item) => item.item.name);
 
     setheldItems(heldItems);
   };
   return (
     <div>
       <h1>Pokemon</h1>
-
+      {fetchOk ? <div></div> : <div>Sorry, you haven't caught that</div>}
       <form onSubmit={getPokemon}>
         <input
           type='search'
